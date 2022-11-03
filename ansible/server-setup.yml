@@ -37,6 +37,9 @@
         append: true
         create_home: true
     
+    - name: Ensures .ssh exists
+      file: path={{ lookup('file', lookup('env','HOME') + '/.ssh/')}} state=directory
+
     - name: copy ssh key from dotfiles if on does not exist
       copy:
         src: "{{ lookup('file', lookup('env','HOME') + '/.dotfiles/ssh/id_rsa.pub') }}"
