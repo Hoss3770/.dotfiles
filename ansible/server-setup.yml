@@ -13,8 +13,6 @@
         name: aptitude
         state: latest
         update_cache: true 
-  
-    tasks:
     - name: Install sudo
       apt:
         name: sudo
