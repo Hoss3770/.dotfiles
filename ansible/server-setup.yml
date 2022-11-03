@@ -13,6 +13,12 @@
         name: aptitude
         state: latest
         update_cache: true 
+  
+    tasks:
+    - name: Install sudo
+      apt:
+        name: sudo
+        state: latest
 
     - name: Setup passwordless sudo
       lineinfile: #You’re using the lineinfile Ansible module to target and replace a specific line in a file.
