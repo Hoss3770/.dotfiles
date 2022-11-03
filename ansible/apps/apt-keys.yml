@@ -1,0 +1,6 @@
+# - name: install elasticsearch 6.x deb repository
+#   apt_repository:
+#     repo: deb https://deb.volian.org/volian/ stable main
+#     state: present
+#     update_cache: no
+#   become: true
