@@ -36,6 +36,15 @@
         groups: sudo
         append: true
         create_home: true
+    
+    - name: copy ssh key from dotfiles if on does not exist
+      copy:
+        src: .dotfiles/ssh/id_rsa.pub
+        dest: ~/.ssh/id_rsa.pub
+        force: no
+        validate: 'ssh-keygen -lf %s'
+      # when: ansible_os_family == "Debian"
+
 
     - name: Set authorized key for remote user
       ansible.posix.authorized_key:
