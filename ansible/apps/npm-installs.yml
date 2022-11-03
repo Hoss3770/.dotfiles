@@ -1,0 +1,9 @@
+- name: install different packages with npm
+  npm: 
+    name: pm2  
+    global: true
+- name: Install nvm
+  ansible.builtin.shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"  

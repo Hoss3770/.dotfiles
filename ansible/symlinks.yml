@@ -1,0 +1,48 @@
+- name: .zprezto dir
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zprezto')}}"
+    state: link
+
+- name: zlogin
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto/zlogin
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zlogin')}}"
+    state: link
+
+- name: zlogin
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto/zlogout
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zlogout')}}"
+    state: link
+
+- name: zlogin
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto/zpreztorc
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zpreztorc')}}"
+    state: link
+
+
+- name: zlogin
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto/zpreztorc
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zpreztorc')}}"
+    state: link
+
+- name: zprofile
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto/zpreztorc
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zprofile')}}"
+    state: link
+
+- name: zshenv
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto/zpreztorc
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zshenv')}}"
+    state: link
+
+- name: zshrc
+  ansible.builtin.file:
+    src: .dotfiles/.zprezto/zpreztorc
+    dest: "{{ lookup('file', lookup('env','HOME') + '.zshrc')}}"
+    state: link

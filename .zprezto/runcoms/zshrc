@@ -11,6 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 PATH=$PATH:~/.local/bin
+PATH=$PATH:~/.vscode-server
 
 alias libreoffice=libreoffice7.3
 # Customize to your needs...

@@ -1,0 +1,37 @@
+- name: Update apt and install required system packages
+  apt:
+    pkg:
+      - zsh
+      - curl
+      - vim
+      - git
+      - ufw
+      - tmux
+      - ruby-full
+      - php
+      - python3
+      - postgresql
+      - postgresql-contrib
+      - docker
+      - nginx-extras
+      - default-jre
+      - mysql-server
+      - redis
+      # - libssl1.1 # mongo dependency
+      # - mongodb-org
+      - ffmpeg
+      - libreoffice
+      - ripgrep # only >= 18.10 ubuntu
+      - python3-certbot-nginx
+      - nodejs
+      - npm
+      - ubuntu-desktop #ubuntu only
+      - xrdp
+      - nala # a gui for apt
+    state: latest
+    update_cache: true
+  tags:
+    - apps 
+    # this will enable you to run `ansible-playbook -i hosts -t apps  setup.yml` 
+    # and it will only run this one
+    # you can also use `with` : so you can run some stuff only on mac and others only on ubuntu
