@@ -37,10 +37,10 @@
         append: true
         create_home: true
     
-  - name: Create a directory if it does not exist
-    ansible.builtin.file:
-      path: {{ lookup('file', lookup('env','HOME') + '/.ssh/')}} 
-      state: directory
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: {{ lookup('file', lookup('env','HOME') + '/.ssh/')}} 
+        state: directory
 
     - name: copy ssh key from dotfiles if on does not exist
       copy:
