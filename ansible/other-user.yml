@@ -1,0 +1,10 @@
+#not used yet
+- name: Create a new regular user with sudo privileges
+  user:
+    name: "{{ created_username }}"
+    password: "{{ lookup('file', lookup('env','HOME') + '.dotfiles/passwords/server.txt') }}" 
+    state: present
+    groups: sudo
+    append: true
+    create_home: true
+    shell: /usr/bin/zsh

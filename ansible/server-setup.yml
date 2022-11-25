@@ -29,34 +29,7 @@
         validate: '/usr/sbin/visudo -cf %s' # validate the file before copying it to the final destination 
         # this %s here ^ is the temp path of the file before copying it
         # -c enables check only mode ; -f = --file -> sudoers file
-        # I f the check completes successfully, visudo will exit with a value of 0. If an error is encountered, visudo will exit with a value of 1.
-
-    - name: Create a new regular user with sudo privileges
-      user:
-        name: "{{ created_username }}"
-        state: present
-        groups: sudo
-        append: true
-        create_home: true
-    
-    - name: Create a directory if it does not exist
-      file:
-        path: ~/.ssh
-        state: directory
-
-    - name: copy ssh key from dotfiles if on does not exist
-      copy:
-        src: ~/.dotfiles/ssh/id_rsa.pub
-        dest: ~/.ssh/id_rsa.pub
-        decrypt: yes
-        force: no
-        validate: 'ssh-keygen -lf %s'
-
-    - name: Set authorized key for remote user
-      authorized_key:
-        user: "{{ created_username }}"
-        state: present
-        key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"         
+        # I f the check completes successfully, visudo will exit with a value of 0. If an error is encountered, visudo will exit with a value of 1.       
     
     - name: Disable password authentication for root
       lineinfile:
