@@ -9,7 +9,7 @@
     created_username: deploy
 
   tasks:
-    - include: apps/apt-keys.yml
+    #- include: apps/apt-keys.yml
     - name: Install aptitude
       apt:
         name: aptitude
@@ -38,7 +38,7 @@
         regexp: '^#?PermitRootLogin' # replace line match
         line: 'PermitRootLogin prohibit-password' #with this line
     
-    - include: apps/apps.yml #helps to organize everything , splitting files
     - include : apps/zsh.yml
     - include : symlinks.yml
-    - include : apps/npm-installs.yml
+    - include: apps/apps.yml #helps to organize everything , splitting files
+    # - include : apps/npm-installs.yml
