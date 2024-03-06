@@ -1,2 +1,6 @@
+- name: install zsh
+  apt:
+    pkg:
+      - zsh
 - name: make zsh default
   shell: chsh -s `which zsh`

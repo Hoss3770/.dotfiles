@@ -1,18 +1,20 @@
+# todo
+# add keys mongo
+# apt keys for nala
+# zsh history
+#
 - hosts: localhost
   become: true
   vars:
     created_username: deploy
-  pre_tasks:
-    - name: Run the equivalent of "apt-get update" as a separate step
-      ansible.builtin.apt:
-        update_cache: yes
 
   tasks:
+    #- include: apps/apt-keys.yml
     - name: Install aptitude
       apt:
         name: aptitude
         state: latest
-        update_cache: true 
+        update_cache: true
     - name: Install sudo
       apt:
         name: sudo
@@ -22,51 +24,22 @@
       lineinfile: #You’re using the lineinfile Ansible module to target and replace a specific line in a file.
         path: /etc/sudoers
         state: present #the line should be present
-        regexp: '^%sudo' # find the first match
-        line: '%sudo ALL=(ALL) NOPASSWD: ALL' # replace this line with this value
-        validate: '/usr/sbin/visudo -cf %s' # validate the file before copying it to the final destination 
+        regexp: "^%sudo" # find the first match
+        line: "%sudo ALL=(ALL) NOPASSWD: ALL" # replace this line with this value
+        validate: "/usr/sbin/visudo -cf %s" # validate the file before copying it to the final destination
         # this %s here ^ is the temp path of the file before copying it
         # -c enables check only mode ; -f = --file -> sudoers file
         # I f the check completes successfully, visudo will exit with a value of 0. If an error is encountered, visudo will exit with a value of 1.
 
-    - name: Create a new regular user with sudo privileges
-      user:
-        name: "{{ created_username }}"
-        state: present
-        groups: sudo
-        append: true
-        create_home: true
-    
-    - name: Create a directory if it does not exist
-      ansible.builtin.file:
-        path: {{ lookup('file', lookup('env','HOME') + '/.ssh/')}} 
-        state: directory
-
-    - name: copy ssh key from dotfiles if on does not exist
-      copy:
-        src: "{{ lookup('file', lookup('env','HOME') + '/.dotfiles/ssh/id_rsa.pub') }}"
-        dest: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-        decrypt: yes
-        force: no
-        validate: 'ssh-keygen -lf %s'
-      # when: ansible_os_family == "Debian"
-
-
-    - name: Set authorized key for remote user
-      ansible.authorized_key:
-        user: "{{ created_username }}"
-        state: present
-        key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"         
-    
     - name: Disable password authentication for root
       lineinfile:
         path: /etc/ssh/sshd_config
         state: present
-        regexp: '^#?PermitRootLogin' # replace line match
-        line: 'PermitRootLogin prohibit-password' #with this line
-    
+        regexp: "^#?PermitRootLogin" # replace line match
+        line: "PermitRootLogin prohibit-password" #with this line
+
     - include_tasks: apps/apps.yml #helps to organize everything , splitting files
-    - include_tasks : apps/zsh.yml
-    - include_tasks : symlinks.yml
-    - include_tasks : apps/npm-installs.yml
-    - include_tasks : /docker.yml
+    - include_tasks: apps/zsh.yml
+    - include_tasks: symlinks.yml
+    - include_tasks: apps/npm-installs.yml
+    - include_tasks: /docker.yml
