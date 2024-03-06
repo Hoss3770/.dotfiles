@@ -53,7 +53,7 @@
 
 
     - name: Set authorized key for remote user
-      ansible.posix.authorized_key:
+      ansible.authorized_key:
         user: "{{ created_username }}"
         state: present
         key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"         
@@ -65,8 +65,8 @@
         regexp: '^#?PermitRootLogin' # replace line match
         line: 'PermitRootLogin prohibit-password' #with this line
     
-    - include: apps/apps.yml #helps to organize everything , splitting files
-    - include : apps/zsh.yml
-    - include : symlinks.yml
-    - include : apps/npm-installs.yml
-    - include : /docker.yml
+    - include_tasks: apps/apps.yml #helps to organize everything , splitting files
+    - include_tasks : apps/zsh.yml
+    - include_tasks : symlinks.yml
+    - include_tasks : apps/npm-installs.yml
+    - include_tasks : /docker.yml
