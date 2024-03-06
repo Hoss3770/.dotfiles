@@ -9,7 +9,7 @@
     created_username: deploy
 
   tasks:
-    #- include: apps/apt-keys.yml
+    #- include_tasks: apps/apt-keys.yml
     - name: Install aptitude
       apt:
         name: aptitude
@@ -41,5 +41,5 @@
     - include_tasks: apps/apps.yml #helps to organize everything , splitting files
     - include_tasks: apps/zsh.yml
     - include_tasks: symlinks.yml
-    - include_tasks: apps/npm-installs.yml
+    # - include_tasks: apps/npm-installs.yml
     - include_tasks: /docker.yml
