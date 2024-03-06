@@ -16,4 +16,4 @@
     # and it will only run this one
     # you can also use `with` : so you can run some stuff only on mac and others only on ubuntu
 
-- include: docker.yml
+- include_tasks: docker.yml
