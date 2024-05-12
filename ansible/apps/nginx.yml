@@ -1,12 +1,19 @@
-- name: Add nginx Repository
-  apt_repository:
-    repo: deb https://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx
+- name: Add repository
+  ansible.builtin.apt_repository:
+    repo: ppa:nginx/stable
     state: present
+    update_cache: yes
 
-- name: Add nginx Repository
-  apt_repository:
-    repo: deb-src https://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx
-    state: present
+# - name: Add repository key nginx
+#   ansible.builtin.apt_key:
+#     url: "https://example.com/repository.key" # Replace with the actual URL of the key
+#     state: present
+#     keyring: /etc/apt/trusted.gpg.d/example_repo.gpg # Specify a unique filename for the key
+
+# - name: Add nginx Repository
+#   apt_repository:
+#     repo: deb-src https://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx
+#     state: present
 
 - name: Update apt and install nginx
   apt:
