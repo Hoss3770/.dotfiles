@@ -17,3 +17,4 @@
     # you can also use `with` : so you can run some stuff only on mac and others only on ubuntu
 
 - include_tasks: docker.yml
+- include_tasks: nginx.yml

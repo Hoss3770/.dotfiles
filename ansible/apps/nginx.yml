@@ -1,0 +1,16 @@
+- name: Add nginx Repository
+  apt_repository:
+    repo: deb https://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx
+    state: present
+
+- name: Add nginx Repository
+  apt_repository:
+    repo: deb-src https://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx
+    state: present
+
+- name: Update apt and install nginx
+  apt:
+    pkg:
+     - nginx
+    state: latest
+    update_cache: true
