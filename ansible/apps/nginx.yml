@@ -18,6 +18,6 @@
 - name: Install Nginx
   apt:
     pkg:
-      name: nginx
+      - nginx
     state: present
     update_cache: true
