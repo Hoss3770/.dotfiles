@@ -18,3 +18,4 @@
 
 - include_tasks: docker.yml
 - include_tasks: nginx.yml
+- include_tasks: certbot-nginx.yml
