@@ -1,0 +1,54 @@
+---
+# Firewall configuration using UFW
+# Blocks all incoming ports except SSH (22), HTTP (80), and HTTPS (443)
+# Recommended to run this early in your playbook
+
+- name: Ensure UFW is installed
+  apt:
+    name: ufw
+    state: present
+    update_cache: true
+
+- name: Set default incoming policy to deny
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming
+
+- name: Set default outgoing policy to allow
+  ufw:
+    state: enabled
+    policy: allow
+    direction: outgoing
+
+- name: Allow SSH
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+
+- name: Allow HTTP
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: Allow HTTPS
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+
+# Additional Security Best Practices:
+# - Change the default SSH port (optional, but increases security)
+# - Use fail2ban to block repeated failed login attempts
+# - Disable root login over SSH (already in your playbook)
+# - Keep the system and packages up to date
+# - Use strong, unique passwords or SSH keys for authentication
+# - Limit sudo access to trusted users
+# - Regularly audit open ports and running services
+# - Consider using two-factor authentication for SSH

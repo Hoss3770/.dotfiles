@@ -38,6 +38,10 @@
         regexp: "^#?PermitRootLogin" # replace line match
         line: "PermitRootLogin prohibit-password" #with this line
 
+    # --- Security Section ---
+    - name: Include firewall configuration
+      include_tasks: security/firewall.yml
+
     - include_tasks: apps/apps.yml #helps to organize everything , splitting files
     - include_tasks: apps/zsh.yml
     - include_tasks: symlinks.yml
